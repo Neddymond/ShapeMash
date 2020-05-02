@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 7
   height: 10
+  offset: 20
   dots:
   - {fileID: 8779655674580735793, guid: 10e5f10d408f4194cac2748bacaba9d8, type: 3}
   - {fileID: 5553628007889397238, guid: 3216ed4f090a2d44a854ebf3d7a0a9a6, type: 3}

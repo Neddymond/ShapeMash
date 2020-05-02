@@ -25,14 +25,14 @@ public class DotTracker : MonoBehaviour
     public float swipeAngle = 0;
     void Start()
     {
-        targetX = (int)transform.position.x;
-        targetY = (int)transform.position.y;
+        //targetX = (int)transform.position.x;
+        //targetY = (int)transform.position.y;
 
-        column = targetX;
-        row = targetY;
+        //column = targetX;
+        //row = targetY;
 
-        previousColumn = column;
-        previousRow = row;
+        //previousColumn = column;
+        //previousRow = row;
 
         board = FindObjectOfType<Board>();
     }
@@ -123,6 +123,8 @@ public class DotTracker : MonoBehaviour
         {
             // Right swipe
             otherDot = board.allDots[column + 1, row];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<DotTracker>().column -= 1;
             column += 1;
         }
@@ -130,6 +132,8 @@ public class DotTracker : MonoBehaviour
         {
             // Up swipe
             otherDot = board.allDots[column, row + 1];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<DotTracker>().row -= 1;
             row += 1;
         }
@@ -137,6 +141,8 @@ public class DotTracker : MonoBehaviour
         {
             // Left swipe
             otherDot = board.allDots[column - 1, row];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<DotTracker>().column += 1;
             column -= 1;
         }
@@ -144,6 +150,8 @@ public class DotTracker : MonoBehaviour
         {
             // Down swipe
             otherDot = board.allDots[column, row - 1];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<DotTracker>().row += 1;
             row -= 1;
         }
@@ -208,7 +216,7 @@ public class DotTracker : MonoBehaviour
                 row = previousRow;
                 column = previousColumn;
             }
-                        board.DestroyMatches();
+            board.DestroyMatches();
             otherDot = null;
         }
     }

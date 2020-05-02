@@ -6,6 +6,7 @@ public class Board : MonoBehaviour
 {
     public int width;
     public int height;
+    public int offset;
 
     //private BackgroundTile[,] allTiles;
 
@@ -30,7 +31,7 @@ public class Board : MonoBehaviour
             for (int j = 0; j < height; j++)
             {
                 // Grids
-                Vector2 gridPosition = new Vector2(i, j);
+                Vector2 gridPosition = new Vector2(i, j + offset);
                 GameObject backGroundTile = Instantiate(tilePrefab, gridPosition, Quaternion.identity) as GameObject;
                 backGroundTile.transform.parent = this.transform;
                 backGroundTile.transform.name = $"( {i}, {j} )";
@@ -49,6 +50,11 @@ public class Board : MonoBehaviour
                 maxIterations = 0;
 
                 GameObject dotToInstantiate = Instantiate(dots[randomDots], gridPosition, Quaternion.identity) as GameObject;
+                
+                dotToInstantiate.GetComponent<DotTracker>().column = i;
+                //set the value of the row of the dot using the value of j which has an offset added to it
+                dotToInstantiate.GetComponent<DotTracker>().row = j;
+
                 dotToInstantiate.transform.parent = this.transform;
                 dotToInstantiate.name = $"( {i}, {j} )";
 
@@ -164,9 +170,13 @@ public class Board : MonoBehaviour
             {
                 if (allDots[i, j] == null)
                 {
-                    Vector2 tempPosition = new Vector2(i, j);
+                    Vector2 tempPosition = new Vector2(i, j + offset);
                     int random = Random.Range(0, dots.Length);
                     GameObject instantiatedDot = Instantiate(dots[random], tempPosition, Quaternion.identity);
+
+                    instantiatedDot.GetComponent<DotTracker>().column = i;
+                    instantiatedDot.GetComponent<DotTracker>().row = j;
+
                     allDots[i, j] = instantiatedDot;
                 }
             }
